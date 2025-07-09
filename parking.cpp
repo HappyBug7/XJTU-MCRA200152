@@ -28,17 +28,18 @@ int main() {
 	if (!InitializeWinIo()) {
 		std::cout << "Error in Initialization" << std::endl;
 	}
-	std::cout << "Í£³µ¹ÜÀíÏµÍ³£¬Æô¶¯£¡" << std::endl
-		<< "M1 ÕÚ¹âÏÂ½µÑØ±íÊ¾Í£³µ£¬M2 ÕÚ¹âÏÂ½µÑØ±íÊ¾È¡³µ¡£" << std::endl;
+	std::cout << "åœè½¦ç®¡ç†ç³»ç»Ÿï¼Œå¯åŠ¨ï¼" << std::endl
+		<< "M1 é®å…‰ä¸‹é™æ²¿è¡¨ç¤ºåœè½¦ï¼ŒM2 é®å…‰ä¸‹é™æ²¿è¡¨ç¤ºå–è½¦ã€‚" << std::endl;
 	while (true) {
 		GetPortVal(BASE_ADDRESS + iPort, p, 1);
 		input = *p;
 		input = ~input;
 		
 
-		if (is_in) std::cout << "½ø³µ,¿ÕÓàÊýÁ¿¼õÒ»£¡" << std::endl;
-		if (is_out) std::cout << "³ö³µ,¿ÕÓàÊýÁ¿¼ÓÒ»£¡" << std::endl;
+		if (is_in) std::cout << "è¿›è½¦,ç©ºä½™æ•°é‡å‡ä¸€ï¼" << std::endl;
+		if (is_out) std::cout << "å‡ºè½¦,ç©ºä½™æ•°é‡åŠ ä¸€ï¼" << std::endl;
 		is_out = (((input >> 1) & 0x01) - ((input_prev >> 1) & 0x01)) == 1;
+	        is_in = ((input & 0x01) - (input_prev & 0x01)) == 1;
 		input_prev = input;
 		empty_lot += 1 * is_out - 1 * is_in;
 		if (empty_lot >= 100) empty_lot = 99;
@@ -48,7 +49,7 @@ int main() {
 		if (_kbhit()) {
 			char flag = _getch();
 			if (flag == 'q' || flag == 'Q') {
-				std::cout << "ÓÃ»§ÊäÈëÍË³ö£¬ÍË³ö³ÌÐò£¡" << std::endl;
+				std::cout << "ç”¨æˆ·è¾“å…¥é€€å‡ºï¼Œé€€å‡ºç¨‹åºï¼" << std::endl;
 				Sleep(500);
 				break;
 			}
